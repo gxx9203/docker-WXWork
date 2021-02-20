@@ -10,6 +10,29 @@
 本镜像基于[深度操作系统](https://www.deepin.org/download/)
 
 ## 更新版本
+
+### 2021/02/20
+  * 更新wxwork 到3.1.2.2211 
+  * 需要自己本地build image 
+  * 
+```bash
+    docker run -d --name wechat --device /dev/snd --ipc host \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v $HOME/WXWork:/WXWork \
+    -v $HOME:/HostHome \
+    -v $HOME/wine-WXWork:/home/wechat/.deepinwine/Deepin-WXWork \
+    -e DISPLAY=unix$DISPLAY \
+    -e XMODIFIERS=@im=fcitx \
+    -e QT_IM_MODULE=fcitx \
+    -e GTK_IM_MODULE=fcitx \
+    -e AUDIO_GID=`getent group audio | cut -d: -f3` \
+    -e GID=`id -g` \
+    -e UID=`id -u` \
+    -e DPI=96 \
+    -e WAIT_FOR_SLEEP=1 \
+     wine_wxwork
+```
+
 ### 2020/04/09
   * 更换wine配置（巨型镜像警告）
   * 内置版本更新到 3.0.14.1205 
