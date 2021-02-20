@@ -16,6 +16,8 @@
   * 需要自己本地build image 
   * 
 ```bash
+    docker build -t=wine_wxwork .
+    
     docker run -d --name wechat --device /dev/snd --ipc host \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v $HOME/WXWork:/WXWork \
