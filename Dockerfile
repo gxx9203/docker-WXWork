@@ -1,10 +1,14 @@
 FROM bestwu/wine:i386
 LABEL maintainer='BoringCat <boringcat@outlook.com>'
 
-ARG WXWORK_VERSION=3.0.14.1205
+ARG WXWORK_VERSION=3.1.2.2211
 
 RUN set -xe && \
-    echo 'deb https://mirrors.aliyun.com/deepin stable main non-free contrib' > /etc/apt/sources.list && \
+    apt-get update && \
+    apt-get install -y apt-transport-https apt-utils
+
+RUN set -xe && \
+#  echo 'deb http://mirrors.aliyun.com/deepin/ apricot main contrib non-free'> /etc/apt/sources.list && \
     apt-get update && \
     apt-get install -y --no-install-recommends deepin.com.weixin.work wget && \
     apt-get -y autoremove && apt-get clean -y && apt-get autoclean -y && \
@@ -17,7 +21,7 @@ RUN set -xe && \
 COPY files.7z /tmp/files.7z
 
 RUN set -xe && \
-    wget https://dldir1.qq.com/wework/work_weixin/WXWork_${WXWORK_VERSION}.exe -O /tmp/WXWork.exe && \
+    wget https://dldir1.qq.com/wework/work_weixin/WeCom_${WXWORK_VERSION}.exe -O /tmp/WXWork.exe && \
     mkdir -p /tmp/drive_c/Program\ Files/WXWork && \
     7z x -o/tmp/drive_c/Program\ Files/WXWork /tmp/WXWork.exe && \
     rm -r /tmp/drive_c/Program\ Files/WXWork/\$PLUGINSDIR/ && \
