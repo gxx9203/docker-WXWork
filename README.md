@@ -34,6 +34,26 @@
     -e WAIT_FOR_SLEEP=1 \
      wine_wxwork
 ```
+  * 或者运行
+ ```bash
+    docker build -t=wine_wxwork .
+    
+    docker run -d --name wechat --device /dev/snd --ipc host \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v $HOME/WXWork:/WXWork \
+    -v $HOME:/HostHome \
+    -v $HOME/wine-WXWork:/home/wechat/.deepinwine/Deepin-WXWork \
+    -e DISPLAY=unix$DISPLAY \
+    -e XMODIFIERS=@im=fcitx \
+    -e QT_IM_MODULE=fcitx \
+    -e GTK_IM_MODULE=fcitx \
+    -e AUDIO_GID=`getent group audio | cut -d: -f3` \
+    -e GID=`id -g` \
+    -e UID=`id -u` \
+    -e DPI=96 \
+    -e WAIT_FOR_SLEEP=1 \
+     gxx9203/wine_wxwork
+```
 
 ### 2020/04/09
   * 更换wine配置（巨型镜像警告）
